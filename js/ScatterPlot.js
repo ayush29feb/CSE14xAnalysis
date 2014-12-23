@@ -39,14 +39,18 @@ var ScatterPlot = function (data, div, frameWidth, frameHeight) {
 			   .append('g')
 			   	.attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
 	
-	svg.selectAll('.dot')
-		.data(data)
-	.enter().append('circle')
-		.attr('class','dot')
-		.attr('cx', function(d){ return x(d[0]); })
-		.attr('cy', function(d){ return y(d[1]); })
-		.attr('r', 2)
-		.style('fill', function(d){ return color(d[2]); });
+	var circles = svg.selectAll('.dot')
+					.data(data)
+				.enter().append('circle')
+					.attr('class','dot')
+					.attr('cx', function(d){ return x(d[0]); })
+					.attr('cy', function(d){ return y(d[1]); })
+					.attr('r', 0)
+					.style('fill', function(d){ return color(d[2]); });
+
+	circles.transition().duration(100)
+		.attr('r', 2.5)
+		.delay(function(d) { return 200 + d[2] * 500} );
 
 	svg.append('g')
 		.attr('class', 'x axis')
@@ -57,12 +61,21 @@ var ScatterPlot = function (data, div, frameWidth, frameHeight) {
 		.attr('class', 'y axis')
 		.call(yAxis);
 
-	svg.append('line')
+	var line = svg.append('line')
+		.style('stroke', 'black')
+		.style('stroke-dasharray', '10,10')
+		.style('stroke-width', '2')
+		.attr('x1', 0)
+		.attr('y1', height)
+		.attr('x2', 0)
+		.attr('y2', height);
+
+	line.transition().duration(1000)
 		.attr('x1', 0)
 		.attr('y1', height)
 		.attr('x2', width)
 		.attr('y2', 0)
-		.style('stroke', 'black')
-		.style('stroke-dasharray', '10,10')
-		.style('stroke-width', '2');
+		.delay(2000);
+
+		
 };

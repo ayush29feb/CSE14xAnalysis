@@ -37,10 +37,15 @@ var Histogram = function(data, div, max, tickCount, xlabel) {
 	    .attr("class", "bar")
 	    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
 
-	bar.append("rect")
+	var bars = bar.append("rect")
 	    .attr("x", 1)
 	    .attr("width", x(dataChart[0].dx) - 1)
-	    .attr("height", function(d) { return height - y(d.y); });
+	    .attr("height", function(d) { return height - y(0); });
+
+	bars.transition()
+		.duration(1000)
+		.attr("height", function(d) { return height - y(d.y); })
+		.delay(100);
 
 	bar.append("text")
 	    .attr("dy", ".75em")
