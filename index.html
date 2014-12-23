@@ -23,12 +23,12 @@
 				<p>The CSE142 class have two exams that is the midterm worth 20% and a final worth 40% of the total grade. This contitutes a total of 60% of the final grade. Plotting a scatter plot the scores on midterm vs. final shows us if the students perfomance on the final relative to the midterm.</p>
 				<p>Looking at the scatter plot we can conclude that majority of the class did not perform well on final as compared to the midterm.</p>
 			</div>
-			<div class="col-md-7 scatter-final-midterm"></div>
+			<div class="col-md-7 scatter-final-midterm graph"></div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 histo-midterm"></div>
-			<div class="col-md-4 histo-final" ></div>
-			<div class="col-md-4 histo-grade"></div>
+			<div class="col-md-4 histo-midterm graph"></div>
+			<div class="col-md-4 histo-final graph" ></div>
+			<div class="col-md-4 histo-grade graph"></div>
 		</div>
 
 	</div>
@@ -36,7 +36,7 @@
 	<script type="text/javascript">
 		
 		loadGraphs('data/142.tsv');
-		$(window).resize(function(){
+		$('div .graph').resize(function(){
 			loadGraphs('data/142.tsv');
 		});
 
@@ -65,10 +65,11 @@
 					section.push(data[key]['section']);
 					explore.push(data[key]['explore']);
 				}
-				new ScatterPlot(d3.zip(midterm, finalExam, grade), '.scatter-final-midterm', 680, 400);
-				new Histogram(finalExam, '.histo-final', 101, 10, 'Final Exam Score');
+				new ScatterPlot(d3.zip(midterm, finalExam, grade), '.scatter-final-midterm', 680, 400);				
+		    	new Histogram(finalExam, '.histo-final', 101, 10, 'Final Exam Score');
 				new Histogram(midterm, '.histo-midterm', 101, 10, 'Midterm Score');
 				new Histogram(grade, '.histo-grade', 4.0, 10, 'Final GPA');
+		
 			});
 		}
 	</script>

@@ -39,13 +39,16 @@ var Histogram = function(data, div, max, tickCount, xlabel) {
 
 	var bars = bar.append("rect")
 	    .attr("x", 1)
+	    .attr("y", function(d){ return height - y(d.y);})
 	    .attr("width", x(dataChart[0].dx) - 1)
-	    .attr("height", function(d) { return height - y(0); });
+	    .attr("height", function(d) { return 0; });
 
 	bars.transition()
-		.duration(1000)
+		.duration(1500)
+		.attr("y", 0)
 		.attr("height", function(d) { return height - y(d.y); })
-		.delay(100);
+		.delay(1000)
+		.ease();
 
 	bar.append("text")
 	    .attr("dy", ".75em")
