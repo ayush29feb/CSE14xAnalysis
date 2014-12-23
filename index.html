@@ -19,16 +19,19 @@
 		</div>	
 		<div class="row">
 			<div class="col-md-5">
-				<h2>Midterm Vs. Finals</h2>
-				<p>The CSE142 class have two exams that is the midterm worth 20% and a final worth 40% of the total grade. This contitutes a total of 60% of the final grade. Plotting a scatter plot the scores on midterm vs. final shows us if the students perfomance on the final relative to the midterm.</p>
-				<p>Looking at the scatter plot we can conclude that majority of the class did not perform well on final as compared to the midterm.</p>
+				<h2>Midterm Vs. Final</h2>
+				<p>The CSE142 class have two exams that is the midterm worth 20% and a final worth 40% of the total grade. This contitutes a total of 60% of the final grade. Which plays a major role in the total grade and hence the GPA.</p>
+				<p>Plotting a scatter plot of the scores on midterm vs. final with a <b>y = x</b> line on top of lets us compare student's perfomance on the final relative to the midterm. It can be easily noticed that the majoritry of the dots are below the line which implies that any given student in that reigion did better on the midterm than on the final. Only a very small amount of students did better on the final and these students were in more higher side on the midterm too. Also, quite a few students dropped out of the class. Suprisingly, around 3 stuents who dropped had above average on the midterm</p>
+				<p>Further, we can also plot histographs of scores in midterm, final, and total percentage. Its very clear that most students scored above 90 in midterm while and in final most students were in the range of 80 - 90 points.</p>
+				<p>Hence, we can conclude that majority of the class did not perform well on final as compared to the midterm. Which also makes sense why the midterm is 20% while final is 40%.</p>
+				<p></p>
 			</div>
 			<div class="col-md-7 scatter-final-midterm graph"></div>
 		</div>
 		<div class="row">
 			<div class="col-md-4 histo-midterm graph"></div>
 			<div class="col-md-4 histo-final graph" ></div>
-			<div class="col-md-4 histo-grade graph"></div>
+			<div class="col-md-4 histo-total graph"></div>
 		</div>
 
 	</div>
@@ -47,7 +50,8 @@
 			ass1 = [], ass2 = [], ass3 = [], ass4 = [], ass5 = [], ass6 = [], ass7 = [], ass8 = [], ass9 = [],
 			grade = [],
 			section = [],
-			explore = [];
+			explore = []
+			total = [];
 			d3.tsv(url, function (data) {
 				for(key in data) {
 					midterm[key] = data[key]['midterm'];
@@ -64,11 +68,12 @@
 					ass9.push(data[key]['ass9']);
 					section.push(data[key]['section']);
 					explore.push(data[key]['explore']);
+					total.push(data[key]['total']);
 				}
 				new ScatterPlot(d3.zip(midterm, finalExam, grade), '.scatter-final-midterm', 680, 400);				
 		    	new Histogram(finalExam, '.histo-final', 101, 10, 'Final Exam Score');
 				new Histogram(midterm, '.histo-midterm', 101, 10, 'Midterm Score');
-				new Histogram(grade, '.histo-grade', 4.0, 10, 'Final GPA');
+				new Histogram(total, '.histo-total', 100, 10, 'Total Percentage');
 		
 			});
 		}
