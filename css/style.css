@@ -1,5 +1,5 @@
-body {
-  font: 10px sans-serif;
+* {
+	text-align: justify;
 }
 
 .bar rect {
@@ -17,10 +17,6 @@ body {
   shape-rendering: crispEdges;
 }
 
-#scatter circle {
-    
-}
-
- .area{
+.area{
 	fill: steelblue;
 }

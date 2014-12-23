@@ -4,14 +4,73 @@
 	<title>CSE 142 Analysis</title>
 	<script src="js/libs/d3.min.js" charset="utf-8"></script>
 	<script src="js/libs/jquery-2.1.3.min.js"></script>
+	<script src="js/ScatterPlot.js"></script>
+	<script src="js/Histogram.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css">
 </head>
 <body>
-	<h1>CSE 142 Analysis</h1>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>CSE 142 Analysis</h1>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="col-md-5">
+				<h2>Midterm Vs. Finals</h2>
+				<p>The CSE142 class have two exams that is the midterm worth 20% and a final worth 40% of the total grade. This contitutes a total of 60% of the final grade. Plotting a scatter plot the scores on midterm vs. final shows us if the students perfomance on the final relative to the midterm.</p>
+				<p>Looking at the scatter plot we can conclude that majority of the class did not perform well on final as compared to the midterm.</p>
+			</div>
+			<div class="col-md-7 scatter-final-midterm"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 histo-midterm"></div>
+			<div class="col-md-4 histo-final" ></div>
+			<div class="col-md-4 histo-grade"></div>
+		</div>
 
+	</div>
+	<script src="js/data.js"></script>
+	<script type="text/javascript">
+		
+		loadGraphs('data/142.tsv');
+		$(window).resize(function(){
+			loadGraphs('data/142.tsv');
+		});
 
-
+		function loadGraphs(url) {
+			console.log('run');
+			var midterm = [], 
+			finalExam = []
+			ass1 = [], ass2 = [], ass3 = [], ass4 = [], ass5 = [], ass6 = [], ass7 = [], ass8 = [], ass9 = [],
+			grade = [],
+			section = [],
+			explore = [];
+			d3.tsv(url, function (data) {
+				for(key in data) {
+					midterm[key] = data[key]['midterm'];
+					finalExam.push(data[key]['final']);
+					grade.push(data[key]['grade']);
+					ass1.push(data[key]['ass1']);
+					ass2.push(data[key]['ass2']);
+					ass3.push(data[key]['ass3']);
+					ass4.push(data[key]['ass4']);
+					ass5.push(data[key]['ass5']);
+					ass6.push(data[key]['ass6']);
+					ass7.push(data[key]['ass7']);
+					ass8.push(data[key]['ass8']);
+					ass9.push(data[key]['ass9']);
+					section.push(data[key]['section']);
+					explore.push(data[key]['explore']);
+				}
+				new ScatterPlot(d3.zip(midterm, finalExam, grade), '.scatter-final-midterm', 680, 400);
+				new Histogram(finalExam, '.histo-final', 101, 10, 'Final Exam Score');
+				new Histogram(midterm, '.histo-midterm', 101, 10, 'Midterm Score');
+				new Histogram(grade, '.histo-grade', 4.0, 10, 'Final GPA');
+			});
+		}
+	</script>
 </body>
 </html>

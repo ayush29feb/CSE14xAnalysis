@@ -1,9 +1,12 @@
-var Histogram = function(data, max, tickCount) {
+var Histogram = function(data, div, max, tickCount, xlabel) {
+
+	d3.select(div).selectAll('svg').remove();
+
 	var formatCount = d3.format(",.0f");
 
-	var margin = {top: 10, right: 30, bottom: 30, left: 30},
-	width = 1260 - margin.left - margin.right,
-	height = 500 - margin.top - margin.bottom;
+	var margin = {top: 30, right: 30, bottom: 30, left: 30},
+	width = $(div).width() - margin.left - margin.right,
+	height = $(div).width() - margin.top - margin.bottom;
 
 	var x = d3.scale.linear()
 	    .domain([0, max])
@@ -22,7 +25,7 @@ var Histogram = function(data, max, tickCount) {
 	    .orient("bottom")
 	    .ticks(tickCount);
 
-	var svg = d3.select("#chart").append("svg")
+	var svg = d3.select(div).append("svg")
 	    .attr("width", width + margin.left + margin.right)
 	    .attr("height", height + margin.top + margin.bottom)
 	  .append("g")
@@ -50,4 +53,12 @@ var Histogram = function(data, max, tickCount) {
 	    .attr("class", "x axis")
 	    .attr("transform", "translate(0," + height + ")")
 	    .call(xAxis);
+
+	svg.append('text')
+		.attr("class", "x label")
+	    .attr("text-anchor", "middle")
+	    .attr("x", width / 2)
+	    .attr("y", height + margin.top)
+	    .text(xlabel);
+
 }

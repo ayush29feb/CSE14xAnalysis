@@ -5,12 +5,13 @@
 		The SVG
 		The Circles
 */
-var ScatterPlot = function (data, div) {
+var ScatterPlot = function (data, div, frameWidth, frameHeight) {
 
+	d3.select(div).selectAll('svg').remove();
 
 	var margin = {top : 30, right : 30, bottom : 30, left : 30};
-	var width = 960 - margin.left - margin.right;
-	var height = 600 - margin.top - margin.bottom;
+	var width = $(div).width() - margin.left - margin.right;
+	var height = $(div).width() * 0.75 - margin.top - margin.bottom;
 
 	var x = d3.scale.linear()
 			.domain([0, 101])
@@ -25,12 +26,12 @@ var ScatterPlot = function (data, div) {
 	var xAxis = d3.svg.axis()
 				  .scale(x)
 				  .orient("bottom")
-				  .ticks(20);
+				  .ticks(10);
 
 	var yAxis = d3.svg.axis()
 				  .scale(y)
 				  .orient("left")
-				  .ticks(20);
+				  .ticks(10);
 
 	var svg =  d3.select(div).append('svg')
 				.attr('width', width + margin.left + margin.left)
@@ -44,7 +45,7 @@ var ScatterPlot = function (data, div) {
 		.attr('class','dot')
 		.attr('cx', function(d){ return x(d[0]); })
 		.attr('cy', function(d){ return y(d[1]); })
-		.attr('r', 3)
+		.attr('r', 2)
 		.style('fill', function(d){ return color(d[2]); });
 
 	svg.append('g')
@@ -62,5 +63,6 @@ var ScatterPlot = function (data, div) {
 		.attr('x2', width)
 		.attr('y2', 0)
 		.style('stroke', 'black')
+		.style('stroke-dasharray', '10,10')
 		.style('stroke-width', '2');
 };
