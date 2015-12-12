@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CSE 142 Analysis</title>
+	<title>CSE 143 Analysis</title>
 	<script src="js/libs/d3.min.js" charset="utf-8"></script>
 	<script src="js/libs/jquery-2.1.3.min.js"></script>
 	<script src="js/ScatterPlot.js"></script>
@@ -14,18 +14,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1>CSE 142 Analysis</h1>
-				<p><a href="143.html">CSE143</a></p>
+				<h1>CSE 143 Analysis</h1>
+				<p><a href="index.html">CSE142</a></p>
 			</div>
 		</div>	
 		<div class="row">
 			<div class="col-md-5">
 				<h2>Midterm Vs. Final</h2>
-				<p>The CSE142 class have two exams that is the midterm worth 20% and a final worth 40% of the total grade. This contitutes a total of 60% of the final grade. Which plays a major role in the total grade and hence the GPA.</p>
-				<p>Plotting a scatter plot of the scores on midterm vs. final with a <b>y = x</b> line on top of lets us compare student's perfomance on the final relative to the midterm. It can be easily noticed that the majoritry of the dots are below the line which implies that any given student in that reigion did better on the midterm than on the final. Only a very small amount of students did better on the final and these students were in more higher side on the midterm too. Also, quite a few students dropped out of the class. Suprisingly, around 3 stuents who dropped had above average on the midterm</p>
-				<p>Further, we can also plot histographs of scores in midterm, final, and total percentage. Its very clear that most students scored above 90 in midterm while and in final most students were in the range of 80 - 90 points.</p>
-				<p>Hence, we can conclude that majority of the class did not perform well on final as compared to the midterm. Which also makes sense why the midterm is 20% while final is 40%.</p>
-				<p></p>
+				<p>Analysis text under progess. You are welcome to contribute!</p>
 			</div>
 			<div class="col-md-7 scatter-final-midterm graph"></div>
 		</div>
@@ -39,9 +35,9 @@
 	<script src="js/data.js"></script>
 	<script type="text/javascript">
 		
-		loadGraphs('data/142.tsv');
+		loadGraphs('data/143.tsv');
 		$('div .graph').resize(function(){
-			loadGraphs('data/142.tsv');
+			loadGraphs('data/143.tsv');
 		});
 
 		function loadGraphs(url) {
